@@ -1,0 +1,83 @@
+﻿<Window x:Class="Vs2017GUILayoutMapper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Vs2017GUILayoutMapper"
+        mc:Ignorable="d"
+        Title="VS 2017 - Offline Layout Generator in GUI" Height="350" Width="525" Icon="Icon.ico">
+    <Window.Resources>
+        <Style TargetType="GroupBox">
+            <Setter Property="Padding" Value="3,8,3,8"/>
+        </Style>
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+     </Window.Resources>
+    <ScrollViewer>
+        <StackPanel Orientation="Vertical" CanVerticallyScroll="True">
+            <GroupBox Header="1. Select Edition">
+                <UniformGrid Columns="3">
+                    <RadioButton x:Name="_ed0" GroupName="Edition" Checked="_edition_change">Community</RadioButton>
+                    <RadioButton x:Name="_ed1" GroupName="Edition" Checked="_edition_change">Professional</RadioButton>
+                    <RadioButton x:Name="_ed2" GroupName="Edition" Checked="_edition_change">Enterprise</RadioButton>
+                </UniformGrid>
+            </GroupBox>
+            <GroupBox Header="2. Options">
+                <UniformGrid Columns="3">
+                    <CheckBox x:Name="_pkgrec" Checked="_pkg_Changed" Unchecked="_pkg_Changed" ToolTip="Install recommended components for each workload">Install Recommended</CheckBox>
+                    <CheckBox x:Name="_pkgopt" Checked="_pkg_Changed" Unchecked="_pkg_Changed" ToolTip="Install optional components for each workload">Install Optional</CheckBox>
+                    <ComboBox x:Name="_lang" SelectionChanged="_lang_SelectionChanged"  ToolTip="Select installation language"></ComboBox>
+                </UniformGrid>
+            </GroupBox>
+            <GroupBox Header="3. Select and Review Workloads">
+                <StackPanel Orientation="Vertical">
+                    <UniformGrid Columns="1">
+                        <Button x:Name="_fetch" Click="_fetch_Click">
+                            Fetch Layout (Last update on XYZ)
+                        </Button>
+                        <TextBlock HorizontalAlignment="Center" TextAlignment="Center">
+                            <Italic>To get information about each workload storage size please open the installer.</Italic><LineBreak/>
+                            <Italic>Be advised selecting none workload will result to install <Bold>ALL</Bold> packages.</Italic><LineBreak/>
+                            <Italic>First top workload (The core editor) must be included.</Italic>
+                        </TextBlock>
+                    </UniformGrid>
+                    <TreeView x:Name="_workloads">
+                        <TreeView.ItemTemplate>
+                            <DataTemplate DataType="Workload" >
+                                <TreeViewItem IsExpanded="{Binding Expanded, Mode=TwoWay}" ItemsSource="{Binding Components}">
+                                    <TreeViewItem.Header>
+                                        <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" IsEnabled="{Binding Selectable}" Content="{Binding NameFull}" Checked="_param_change" Unchecked="_param_change"/>
+                                    </TreeViewItem.Header>
+                                    <TreeViewItem.ItemTemplate>
+                                        <DataTemplate DataType="Component">
+                                            <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" IsEnabled="{Binding Selectable}" Content="{Binding NameFull}" Checked="_param_change" Unchecked="_param_change"/>
+                                        </DataTemplate>
+                                    </TreeViewItem.ItemTemplate>
+                                </TreeViewItem>
+                            </DataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="4. Save">
+                <StackPanel Orientation="Vertical">
+                    <Label ToolTip="Open CMD from the installation folder and paste the command. This action will download to C:\vsLayout2017. Modify as you wish.">CLA to download packages: (?)</Label>
+                    <TextBox x:Name="_clidown" TextWrapping="Wrap" Height="40" ></TextBox>
+                    <Label ToolTip="Run the command below from Downloaded Layout Folder. Mostly this action will no longer drain your bandwidth, but it's much better turn off the internet anyway.">CLA to install packages offline: (?)</Label>
+                    <TextBox x:Name="_cliinst" TextWrapping="Wrap" Height="40" ></TextBox>
+                    <Label ToolTip="Certificates stored in 'certificates' folder inside the layout folder. Just open each .p12 file and always next-click it.">NOTE: Always install certificates before performing offline installation. (?)</Label>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="5. More Info">
+                <StackPanel Orientation="Vertical">
+                    <Button Click="_manual_click" Padding="3,10">Open MSDN Manual</Button>
+                    <TextBlock FontStyle="Italic" HorizontalAlignment="Center">(C) Wello Soft 2017. This is a third-party software and does not represent any of Microsoft Products. <Hyperlink NavigateUri="https://github.com/Willnode/Vs2017-LayoutInGUI/" RequestNavigate="Hyperlink_RequestNavigate">Fork me</Hyperlink>. </TextBlock>
+                </StackPanel>
+               
+            </GroupBox>
+        </StackPanel>
+    </ScrollViewer>
+
+</Window>
