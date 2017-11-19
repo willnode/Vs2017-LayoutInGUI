@@ -10,7 +10,7 @@ This software generate arguments for downloading Visual Studio for offline Usage
 
 In order:
 
-1. [Download](./Releases) and Run the software
+1. [Download][medown] and Run the software
 2. Select the edition
 2. Set options (recommended/optional and language)
 3. (Optional) Fetch the updated workload data.
@@ -39,8 +39,9 @@ License: [MIT](LICENSE)
 
 > THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+[medown]: https://github.com/willnode/Vs2017-LayoutInGUI/releases
 [installer]: https://docs.microsoft.com/en-us/visualstudio/install/install-vs-inconsistent-quality-network#step-1---download-the-visual-studio-bootstrapper
 [officialmanual]: https://docs.microsoft.com/en-us/visualstudio/install/install-vs-inconsistent-quality-network
 [workloadsdoc]: https://docs.microsoft.com/en-us/visualstudio/install/workload-and-component-ids
-[workloadsgit]: https://github.com/MicrosoftDocs/visualstudio-docs/tree/master/docs/install
+[workloadsgit]: https://github.com/MicrosoftDocs/visualstudio-docs/blob/master/docs/install/workload-and-component-ids.md
 [certificates]: https://docs.microsoft.com/en-us/visualstudio/install/install-certificates-for-visual-studio-offline

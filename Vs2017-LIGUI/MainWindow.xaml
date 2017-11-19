@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Vs2017GUILayoutMapper"
         mc:Ignorable="d"
-        Title="VS 2017 - Offline Layout Generator in GUI" Height="350" Width="525" Icon="Icon.ico">
+        Title="VS 2017 - Offline Layout Generator in GUI" Height="550" Width="600" Icon="Icon.ico">
     <Window.Resources>
         <Style TargetType="GroupBox">
             <Setter Property="Padding" Value="3,8,3,8"/>
@@ -47,11 +47,11 @@
                             <DataTemplate DataType="Workload" >
                                 <TreeViewItem IsExpanded="{Binding Expanded, Mode=TwoWay}" ItemsSource="{Binding Components}">
                                     <TreeViewItem.Header>
-                                        <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" IsEnabled="{Binding Selectable}" Content="{Binding NameFull}" Checked="_param_change" Unchecked="_param_change"/>
+                                        <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" IsEnabled="{Binding Selectable}" Content="{Binding NameFull}" Checked="_param_change" Unchecked="_param_change" ToolTip="{Binding ID}" />
                                     </TreeViewItem.Header>
                                     <TreeViewItem.ItemTemplate>
                                         <DataTemplate DataType="Component">
-                                            <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" IsEnabled="{Binding Selectable}" Content="{Binding NameFull}" Checked="_param_change" Unchecked="_param_change"/>
+                                            <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" IsEnabled="{Binding Selectable}" Content="{Binding NameFull}" Checked="_param_change" Unchecked="_param_change" ToolTip="{Binding ID}" />
                                         </DataTemplate>
                                     </TreeViewItem.ItemTemplate>
                                 </TreeViewItem>
@@ -64,18 +64,17 @@
             <GroupBox Header="4. Save">
                 <StackPanel Orientation="Vertical">
                     <Label ToolTip="Open CMD from the installation folder and paste the command. This action will download to C:\vsLayout2017. Modify as you wish.">CLA to download packages: (?)</Label>
-                    <TextBox x:Name="_clidown" TextWrapping="Wrap" Height="40" ></TextBox>
+                    <TextBox x:Name="_clidown" TextWrapping="Wrap" MinHeight="40" Height="Auto" IsReadOnly="True" Padding="2,5,2,5" ></TextBox>
                     <Label ToolTip="Run the command below from Downloaded Layout Folder. Mostly this action will no longer drain your bandwidth, but it's much better turn off the internet anyway.">CLA to install packages offline: (?)</Label>
-                    <TextBox x:Name="_cliinst" TextWrapping="Wrap" Height="40" ></TextBox>
+                    <TextBox x:Name="_cliinst" TextWrapping="Wrap" MinHeight="40" Height="Auto" IsReadOnly="True" Padding="2,5,2,5" ></TextBox>
                     <Label ToolTip="Certificates stored in 'certificates' folder inside the layout folder. Just open each .p12 file and always next-click it.">NOTE: Always install certificates before performing offline installation. (?)</Label>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="5. More Info">
                 <StackPanel Orientation="Vertical">
                     <Button Click="_manual_click" Padding="3,10">Open MSDN Manual</Button>
-                    <TextBlock FontStyle="Italic" HorizontalAlignment="Center">(C) Wello Soft 2017. This is a third-party software and does not represent any of Microsoft Products. <Hyperlink NavigateUri="https://github.com/Willnode/Vs2017-LayoutInGUI/" RequestNavigate="Hyperlink_RequestNavigate">Fork me</Hyperlink>. </TextBlock>
+                    <TextBlock FontStyle="Italic" HorizontalAlignment="Center">(C) Wello Soft 2017. This is a third-party software and does not represent any of Microsoft Products. <Hyperlink NavigateUri="https://github.com/willnode/Vs2017-LayoutInGUI" RequestNavigate="Hyperlink_RequestNavigate">Fork me</Hyperlink>. </TextBlock>
                 </StackPanel>
-               
             </GroupBox>
         </StackPanel>
     </ScrollViewer>
