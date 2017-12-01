@@ -7,6 +7,7 @@ using MessageBox = System.Windows.MessageBox;
 using IsoCreatorLib;
 using BER.CDCat.Export;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Vs2017LIGUI
 {
@@ -54,7 +55,8 @@ namespace Vs2017LIGUI
             var path = Path.Combine(_layout.Text, _batch.Text);
             if (Path.GetExtension(path).ToLower() != ".bat") path += ".bat";
             File.WriteAllText(path, string.Format(BatContent, batchproduct, batchtemplate));
-            MessageBox.Show("Batchfile has been written to " + path, "", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (MessageBox.Show("Batchfile has been written to " + path + "\r\nDo you want to start the installation?", "Succeed", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                Process.Start("explorer", path);
         }
 
         private void _destbtn_Click(object sender, RoutedEventArgs e)
@@ -192,6 +194,8 @@ echo Enter again to start installation..
 pause>nul
 echo Launching Vs 2017 Offline Installation....
 {1}
+echo Installation will start soon. Hang tight :)
+timeout 5>nul
 ";
     }
 }

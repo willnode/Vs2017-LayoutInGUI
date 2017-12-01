@@ -15,17 +15,30 @@ In order:
 2. Set options (recommended/optional and language)
 3. (Optional) Fetch the updated workload data.
 4. Choose (and review) selected workloads and component.
-5. Download the [stub installer][installer]. Run with the provided CLA (Command Line Argument) from this software.
+5. Download the [stub installer][installer]. Run with the provided download arguments from this software.
 6. CLI will appear. Wait until all component downloaded.
-7. Open folder `C:\vs2017Layout`.
-8. [Install certificates][certificates].
-9. Run the setup (this time from layout folder) with provided CLA from this software. 
-10. GUI Installation will appear, wait until installation complete.
-11. (Optional) You can save the CLA to `BAT` file for future installation.
+7. Open wizard (see distribute section).
+![Screenshot](Info/ScreenshotWizard.png)
+8. Check the paths, change if necessary.
+9. `Save` the batch file. You'll use this as the starting point of VS 2017 installation.
+10. After the save button, you'll see a confirmation. Click `Yes` to execute the batchfile. Next step you just need to follow the instruction.
+11. (Optional) if you want to keep the layout file for future, hit the `Start` button to save it as an ISO file. Wait until it gets completed.
+
+## Additional Notes
+
+> To run the installation with arguments:
+
+![Hint](Info/CLAHint.png)
+
+> CLI (Command line Interface) will appear when downloading layouts, but will show normal GUI during offline installation.
+
+> Before installation begin VS will show you list of workloads, even when you're offline. Following instruction above you only need to skip it (as cached layouts is already selected via arguments).
+
+> If a component are missing from downloaded layout, it'll redownloaded automatically at install. If you're on metered network you can turn off the internet during install to prevent it. The installation still can continue anyway (with prompts).
 
 ## How it works
 
-This software fetch list of workload and component IDs from [GitHub mirror][workloadsgit] of their [List of Workloads](workloadsdoc) in their documentation. This is necessary because you will always get updated list of workloads, and I don't know other way to do it. 
+This software fetch list of workload and component IDs from [GitHub mirror][workloadsgit] of their [List of Workloads][workloadsdoc] in their documentation. This is necessary because you will always get updated list of workloads, and I don't know other way to do it. 
 
 If Microsoft changes or move their documentation layout or path, there will be chance that this application fail to parse, or even crash. If this happen, tell me.
 
