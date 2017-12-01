@@ -56,7 +56,10 @@ namespace Vs2017LIGUI
             if (Path.GetExtension(path).ToLower() != ".bat") path += ".bat";
             File.WriteAllText(path, string.Format(BatContent, batchproduct, batchtemplate));
             if (MessageBox.Show("Batchfile has been written to " + path + "\r\nDo you want to start the installation?", "Succeed", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
-                Process.Start("explorer", path);
+                Process.Start(new ProcessStartInfo() {
+                    FileName =  path,
+                    WorkingDirectory = _layout.Text
+                });
         }
 
         private void _destbtn_Click(object sender, RoutedEventArgs e)
@@ -183,9 +186,10 @@ echo Welcome to Visual Studio {0} Offline Installation
 echo:
 echo Before installation begin, we need to install certificates first.
 echo:
-echo The process is not automatic. By pressing enter, we'll show three certificates, 
-echo and it's your job is to next-clicking until wizards finished.
+echo The process is not automatic. By pressing enter, we'll lauch three certificates and
+echo it's your job to next-clicking them until all wizards finished.
 pause>nul
+echo:
 echo Launching certificates ...
 forfiles /S /M *.p12 /C ""cmd /c explorer @file""
 echo Do not press enter until all certificates has been installed.

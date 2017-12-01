@@ -63,7 +63,7 @@
                     <Label x:Name="_hottxt">Save ISO File by clicking START</Label>
                     <Button x:Name="_hotbtn" Grid.Column="1" Click="_hotbtn_Click">Start</Button>
                 </Grid>
-                <ProgressBar x:Name="_hotprog" Height="30px" Margin="4px"/>
+                <ProgressBar x:Name="_hotprog" Height="30px" Margin="0,4"/>
             </StackPanel>
         </GroupBox>
     </StackPanel>
