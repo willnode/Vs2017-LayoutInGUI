@@ -2,7 +2,7 @@
 
 This software generate arguments for downloading Visual Studio for offline Usage. Suitable for those who don't familiar with CLI (Command Line Interface).
 
-![Screenshot](Info/Screenshot.png)
+<p align="center"><img src="Info/Screenshot.png" alt="Screenshot"></p>
 
 ## Instruction
 
@@ -12,23 +12,25 @@ In order:
 
 1. [Download][medown] and Run the software
 2. Select the edition
-2. Set options (recommended/optional and language)
-3. (Optional) Fetch the updated workload data.
-4. Choose (and review) selected workloads and component.
-5. Download the [stub installer][installer]. Run with the provided download arguments from this software.
-6. CLI will appear. Wait until all component downloaded.
-7. Open wizard (see distribute section).
+3. Set options (recommended/optional and language)
+4. (Optional) Fetch the updated workload data.
+5. Choose (and review) selected workloads and component.
+6. Download the [stub installer][installer]. Run with the provided download arguments from this software.
+7. CLI will appear. Wait until all component downloaded.
+8. Open wizard (see distribute section). This will open a new window.
+
 ![Screenshot](Info/ScreenshotWizard.png)
-8. Check the paths, change if necessary.
-9. `Save` the batch file. You'll use this as the starting point of VS 2017 installation.
-10. After the save button, you'll see a confirmation. Click `Yes` to execute the batchfile. Next step you just need to follow the instruction.
-11. (Optional) if you want to keep the layout file for future, hit the `Start` button to save it as an ISO file. Wait until it gets completed.
+
+9. Check the paths, change if necessary.
+10. `Save` the batch file. You'll use this as the starting point of VS 2017 installation.
+11. After the save button, you'll see a confirmation. Click `Yes` to execute the batchfile. Next step you just need to follow the instruction.
+12. (Optional) if you want to keep the layout file for future, hit the `Start` button to save it as an ISO file. Wait until it gets completed.
 
 ## Additional Notes
 
 > To run the installation with arguments:
 
-![Hint](Info/CLAHint.png)
+<p align="center"><img src="Info/CLAHint.png" alt="Hint"></p>
 
 > CLI (Command line Interface) will appear when downloading layouts, but will show normal GUI during offline installation.
 
