@@ -1,9 +1,9 @@
-﻿<Window x:Class="Vs2017GUILayoutMapper.MainWindow"
+﻿<Window x:Class="Vs2017LIGUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Vs2017GUILayoutMapper"
+        xmlns:local="clr-namespace:Vs2017LIGUI"
         mc:Ignorable="d"
         Title="VS 2017 - Offline Layout Generator in GUI" Height="550" Width="600" Icon="Icon.ico">
     <Window.Resources>
@@ -63,17 +63,25 @@
             </GroupBox>
             <GroupBox Header="4. Save">
                 <StackPanel Orientation="Vertical">
-                    <Label ToolTip="Open CMD from the installation folder and paste the command. This action will download to C:\vsLayout2017. Modify as you wish.">CLA to download packages: (?)</Label>
+                    <Label ToolTip="Run installer with arguments below. This action will download the layout to C:\vsLayout2017. Modify as you wish.">CLA to download packages: (?)</Label>
                     <TextBox x:Name="_clidown" TextWrapping="Wrap" MinHeight="40" Height="Auto" IsReadOnly="True" Padding="2,5,2,5" ></TextBox>
-                    <Label ToolTip="Run the command below from Downloaded Layout Folder. Mostly this action will no longer drain your bandwidth, but it's much better turn off the internet anyway.">CLA to install packages offline: (?)</Label>
+                    <Label ToolTip="Run the installer FROM THE GENERATED LAYOUT FOLDER with command below.">CLA to install packages offline: (?)</Label>
                     <TextBox x:Name="_cliinst" TextWrapping="Wrap" MinHeight="40" Height="Auto" IsReadOnly="True" Padding="2,5,2,5" ></TextBox>
-                    <Label ToolTip="Certificates stored in 'certificates' folder inside the layout folder. Just open each .p12 file and always next-click it.">NOTE: Always install certificates before performing offline installation. (?)</Label>
+                    <Label ToolTip="Certificates stored in 'certificates' folder inside the layout folder. Open each file and always next-click it.">NOTE: Always install certificates before performing offline installation. (?)</Label>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="5. More Info">
+            <GroupBox Header="5. Distribute">
                 <StackPanel Orientation="Vertical">
-                    <Button Click="_manual_click" Padding="3,10">Open MSDN Manual</Button>
-                    <TextBlock FontStyle="Italic" HorizontalAlignment="Center">(C) Wello Soft 2017. This is a third-party software and does not represent any of Microsoft Products. <Hyperlink NavigateUri="https://github.com/willnode/Vs2017-LayoutInGUI" RequestNavigate="Hyperlink_RequestNavigate">Fork me</Hyperlink>. </TextBlock>
+                    <Label ToolTip="This action is optional. Make sure you have downloaded the layout first.">Export One-Click-to-Install BAT File and Save the downloaded Layout as ISO (?)</Label>
+                    <Button x:Name="_opwiz" Click="_opwiz_Click">
+                        Open Wizard
+                    </Button>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="6. More Info">
+                <StackPanel Orientation="Vertical">
+                    <Button Click="_manual_click" Padding="3,10" ToolTip="Confuse? Please Read Official Manual First">Open MSDN Manual</Button>
+                    <TextBlock FontStyle="Italic" HorizontalAlignment="Center" TextWrapping="Wrap">(C) Wello Soft 2017. This is a third-party software and does not represent any of Microsoft Products. <Hyperlink NavigateUri="https://github.com/willnode/Vs2017-LayoutInGUI" RequestNavigate="Hyperlink_RequestNavigate">Fork me</Hyperlink>. </TextBlock>
                 </StackPanel>
             </GroupBox>
         </StackPanel>

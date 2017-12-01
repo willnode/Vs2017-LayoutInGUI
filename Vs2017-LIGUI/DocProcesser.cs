@@ -1,13 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
 
-namespace Vs2017GUILayoutMapper
+namespace Vs2017LIGUI
 {
 
     public class Workload

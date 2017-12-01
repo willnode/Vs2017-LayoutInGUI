@@ -1,24 +1,15 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace Vs2017GUILayoutMapper
+namespace Vs2017LIGUI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -53,20 +44,19 @@ namespace Vs2017GUILayoutMapper
                 WorkloadRaw = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/workload-component-id-vs-community.md",
             },
 
-         new VSEdition()
-        {
-            Name = "Professional",
+             new VSEdition() {
+                Name = "Professional",
                 DownloadExe = "https://aka.ms/vs/15/release/vs_professional.exe",
                 WorkloadDoc = "https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-professional",
                 WorkloadRaw = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/workload-component-id-vs-professional.md",
             },
-        new VSEdition()
-        {
-            Name = "Enterprise",
+
+            new VSEdition()  {
+                Name = "Enterprise",
                 DownloadExe = "https://aka.ms/vs/15/release/vs_enterprise.exe",
                 WorkloadDoc = "https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-enterprise",
                 WorkloadRaw = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/workload-component-id-vs-enterprise.md",
-        },
+            },
         };
 
         public VSEdition ActiveEdition;
@@ -98,7 +88,7 @@ namespace Vs2017GUILayoutMapper
                 MessageBox.Show("An " + ex.GetType().ToString() + " When fetching URL. Is Internet OK?", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            Processor.Process(x , ActiveEdition.metadata.Workloads);
+            Processor.Process(x, ActiveEdition.metadata.Workloads);
             RebuildWorkload();
             ActiveEdition.SaveJSON();
             PrintFetchStamp();
@@ -107,7 +97,7 @@ namespace Vs2017GUILayoutMapper
         private void _param_change(object sender, RoutedEventArgs e)
         {
             RebuildWorkload();
-            
+
 
             BuildCLIOut();
         }
@@ -127,16 +117,16 @@ namespace Vs2017GUILayoutMapper
             BuildCLIOut();
         }
 
-        public void RebuildWorkload ()
+        public void RebuildWorkload()
         {
-           // well, must be a better way to do this ...
+            // well, must be a better way to do this ...
 
-            _workloads.SetBinding(ItemsControl.ItemsSourceProperty, "");            
+            _workloads.SetBinding(ItemsControl.ItemsSourceProperty, "");
             _workloads.SetBinding(ItemsControl.ItemsSourceProperty, new Binding()
             {
                 Source = ActiveEdition.metadata.Workloads,
                 Mode = BindingMode.Default,
-                
+
                 UpdateSourceTrigger = UpdateSourceTrigger.Default
             });
         }
@@ -172,6 +162,11 @@ namespace Vs2017GUILayoutMapper
         private void _manual_click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://docs.microsoft.com/en-us/visualstudio/install/install-vs-inconsistent-quality-network");
+        }
+
+        private void _opwiz_Click(object sender, RoutedEventArgs e)
+        {
+            new IsoWizard().Show(ActiveEdition, this);
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -219,17 +214,16 @@ namespace Vs2017GUILayoutMapper
             var exe = "vs_" + Name + ".exe ";
             var layout = "--layout C:\\vs2017Layout ";
             var body = "";
-            var foot = "--lang " + ComponentSettings.Lang;
+            var foot = "";
+            var lang = "--lang " + ComponentSettings.Lang;
             foreach (var loads in metadata.Workloads)
             {
                 if (!string.IsNullOrEmpty(loads.ID) && loads.Selected)
-                        body += "--add " + loads.ID + " ";
+                    body += "--add " + loads.ID + " ";
 
                 foreach (var comp in loads.Components)
-                {
                     if (comp.SelfSelected && !comp.SelectedFromWorkload())
                         body += "--add " + comp.ID + " ";
-                }
             }
 
             if (ComponentSettings.UseRecommended)
@@ -238,17 +232,16 @@ namespace Vs2017GUILayoutMapper
             if (ComponentSettings.UseOptional)
                 foot = "--includeOptional " + foot;
 
-            GeneratedFetch = exe + layout + body + foot;
+            GeneratedFetch = exe + layout + body + foot + lang;
             GeneratedInstall = exe + body + foot + (Name == "Enterprise" ? "--noWeb" : "");
         }
 
-        
+
     }
 
     public class Metadata
     {
         public DateTime FetchTime;
         public List<Workload> Workloads = new List<Workload>();
-
     }
 }
