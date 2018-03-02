@@ -89,6 +89,7 @@ namespace Vs2017LIGUI
     public class DocProcesser
     {
 
+        // Markdown parsing starts here
         public void Process(string doc, List<Workload> Workloads)
         {
             Workloads.Clear();
@@ -120,9 +121,10 @@ namespace Vs2017LIGUI
 
                     while (i < lines.Length && lines[i++].Substring(0, 5) != "--- |")
                     {
+                        // we're incrementing i
                     }
 
-                    // begin fetch component
+                    // begin fetching components
                     while (lines[i].Substring(0, 3) != "## ")
                     {
                         var line3rd = lines[i++].Split('|');
@@ -142,9 +144,6 @@ namespace Vs2017LIGUI
                 else
                     i++;
 
-            }
-            foreach (var str in doc.Replace("\r", "").Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries))
-            {
             }
         }
     }

@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Navigation;
+using System.Linq;
 
 namespace Vs2017LIGUI
 {
@@ -174,6 +175,12 @@ namespace Vs2017LIGUI
             Process.Start(e.Uri.AbsoluteUri);
             e.Handled = true;
         }
+
+        private void _workloads_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            e.Handled = true;
+            _app.ScrollToVerticalOffset(_app.VerticalOffset - e.Delta * 0.5);
+        }
     }
 
 
@@ -213,17 +220,17 @@ namespace Vs2017LIGUI
         {
             var exe = "vs_" + Name + ".exe ";
             var layout = "--layout C:\\vs2017Layout ";
-            var body = "";
+            var body = new List<string>();
             var foot = "";
             var lang = "--lang " + ComponentSettings.Lang;
             foreach (var loads in metadata.Workloads)
             {
                 if (!string.IsNullOrEmpty(loads.ID) && loads.Selected)
-                    body += "--add " + loads.ID + " ";
+                    body.Add("--add " + loads.ID + " ");
 
                 foreach (var comp in loads.Components)
                     if (comp.SelfSelected && !comp.SelectedFromWorkload())
-                        body += "--add " + comp.ID + " ";
+                        body.Add("--add " + comp.ID + " ");
             }
 
             if (ComponentSettings.UseRecommended)
@@ -232,8 +239,9 @@ namespace Vs2017LIGUI
             if (ComponentSettings.UseOptional)
                 foot = "--includeOptional " + foot;
 
-            GeneratedFetch = exe + layout + body + foot + lang;
-            GeneratedInstall = exe + body + foot + (Name == "Enterprise" ? "--noWeb" : "");
+            var bodystr = string.Join("", body.Distinct());
+            GeneratedFetch = (exe + layout + bodystr + foot + lang).Replace("  ", " ");
+            GeneratedInstall = exe + bodystr + foot + (Name == "Enterprise" ? "--noWeb" : "");
         }
 
 

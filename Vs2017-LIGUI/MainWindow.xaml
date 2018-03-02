@@ -14,7 +14,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
      </Window.Resources>
-    <ScrollViewer>
+    <ScrollViewer x:Name="_app">
         <StackPanel Orientation="Vertical" CanVerticallyScroll="True">
             <GroupBox Header="1. Select Edition">
                 <UniformGrid Columns="3">
@@ -42,7 +42,7 @@
                             <Italic>First top workload (The core editor) must be included.</Italic>
                         </TextBlock>
                     </UniformGrid>
-                    <TreeView x:Name="_workloads">
+                    <TreeView x:Name="_workloads" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" PreviewMouseWheel="_workloads_PreviewMouseWheel">
                         <TreeView.ItemTemplate>
                             <DataTemplate DataType="Workload" >
                                 <TreeViewItem IsExpanded="{Binding Expanded, Mode=TwoWay}" ItemsSource="{Binding Components}">
