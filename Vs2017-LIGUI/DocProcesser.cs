@@ -125,9 +125,13 @@ namespace Vs2017LIGUI
                     }
 
                     // begin fetching components
-                    while (lines[i].Substring(0, 3) != "## ")
+                    while (i < lines.Length && lines[i].Substring(0, 3) != "## ")
                     {
                         var line3rd = lines[i++].Split('|');
+
+                        if (line3rd.Length < 3)
+                            continue; // NOT-A-TABLE line :/
+
                         var component = new Component()
                         {
                             ID = line3rd[0].Trim(),
